@@ -6,13 +6,15 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
 
 public class DispatcherServlet extends HttpServlet {
 
-
-    private RequestInterceptor interceptor;
+    Logger log = LoggerFactory.getLogger(DispatcherServlet.class);
+    private RequestInterceptor interceptor = new RequestInterceptor();
 
     /**
      * @param req
@@ -27,6 +29,7 @@ public class DispatcherServlet extends HttpServlet {
         try {
             this.interceptor.intercept(path, method, req, res);
         } catch (Exception e) {
+            log.error("{}" ,e.getStackTrace());
             throw new RuntimeException(e);
         }
     }

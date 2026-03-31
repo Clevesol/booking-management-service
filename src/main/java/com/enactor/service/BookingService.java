@@ -6,4 +6,7 @@ import com.enactor._server.core.annotation.Service;
 public class BookingService {
 
 
+    public String getAvailability() {
+        return "200";
+    }
 }

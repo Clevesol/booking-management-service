@@ -1,27 +1,33 @@
 package com.enactor.controller;
 
-import com.enactor.domain.dto.BookingAvailabilityDTO;
+import com.enactor._server.core.annotation.Autowired;
+import com.enactor._server.core.annotation.Controller;
+import com.enactor._server.core.annotation.HTTPMethod;
+import com.enactor._server.core.annotation.RequestMapping;
 import com.enactor.domain.dto.BookingDTO;
+import com.enactor.service.BookingService;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
 
-import java.util.List;
+@Controller
+public class BookingController extends BaseController {
 
-public class BookingController {
+    private final BookingService bookingService;
 
 
-    /**
-     * returns available seats as per the input date, required seat count
-     *
-     * @return
-     */
-    public List<BookingAvailabilityDTO> getAvailableSeats(){
-        return null;
+    @Autowired
+    public BookingController(final BookingService bookingService) {
+        this.bookingService = bookingService;
     }
 
-    /**
-     *
-     * @return
-     */
-    public BookingDTO reserveBooking(){
-        return null;
+    @RequestMapping(path = "/api/check-availability", method = HTTPMethod.GET)
+    public void checkAvailability(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+        String response = bookingService.getAvailability();
+        this.initAndWriteResponse(resp, response);
+    }
+
+    @RequestMapping(path = "/api/bookings/reserve", method = HTTPMethod.POST)
+    public void bookTickets(HttpServletRequest req, HttpServletResponse resp) throws Exception {
+        jsonMapper.toObject(req.getInputStream(), BookingDTO.class);
     }
 }
