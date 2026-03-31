@@ -1,5 +1,6 @@
 package com.enactor._server;
 
+import com.enactor._server.interceptor.RequestInterceptor;
 import jakarta.servlet.ServletConfig;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServlet;
@@ -10,18 +11,24 @@ import java.io.IOException;
 
 public class DispatcherServlet extends HttpServlet {
 
-    private final String baseAPIURL;
 
-    public DispatcherServlet(){
-        this.baseAPIURL = "/api/*";
-    }
+    private RequestInterceptor interceptor;
 
     /**
-     *
-     * @return
+     * @param req
+     * @param res
+     * @throws ServletException
+     * @throws IOException
      */
-    public String getBaseAPIURL() {
-        return baseAPIURL;
+    @Override
+    public void service(HttpServletRequest req, HttpServletResponse res) throws ServletException, IOException {
+        String path = req.getRequestURI().substring(req.getContextPath().length());
+        String method = req.getMethod();
+        try {
+            this.interceptor.intercept(path, method, req, res);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
     }
 
     /**
@@ -42,49 +49,21 @@ public class DispatcherServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        System.out.println("intercepting uri->" +  req.getRequestURI() + " url->"+ req.getRequestURL()+"\n");
+        System.out.println("intercepting uri->" + req.getRequestURI() + " url->" + req.getRequestURL() + "\n");
         resp.getWriter().write("works");
         super.doGet(req, resp);
     }
 
-    /**
-     * @param req
-     * @param resp
-     * @throws ServletException
-     * @throws IOException
-     */
-    @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPost(req, resp);
-    }
+
+    private static DispatcherServlet dispatcherServlet;
 
     /**
-     * @param req
-     * @param resp
-     * @throws ServletException
-     * @throws IOException
-     */
-    @Override
-    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doPut(req, resp);
-    }
-
-    /**
-     * @param req
-     * @param resp
-     * @throws ServletException
-     * @throws IOException
-     */
-    @Override
-    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        super.doDelete(req, resp);
-    }
-
-    /**
+     * Returns a singleton object of DispatcherServlet
      *
+     * @return dispatcherServlet
      */
-    @Override
-    public void destroy() {
-        super.destroy();
+    public static DispatcherServlet getInstance() {
+        if (null == dispatcherServlet) dispatcherServlet = new DispatcherServlet();
+        return dispatcherServlet;
     }
 }
