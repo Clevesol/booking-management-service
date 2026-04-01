@@ -1,0 +1,29 @@
+package com.enactor.appcore.util.validator.impl;
+
+import com.enactor.appcore.appserver.core.annotation.Autowired;
+import com.enactor.appcore.appserver.core.annotation.DTOValidator;
+import com.enactor.appcore.util.validator.BaseDTOValidator;
+import com.enactor.domain.dto.BookingRequestDTO;
+import com.enactor.service.RouteSegmentService;
+
+
+@DTOValidator
+public class BookingRequestSegmentValidator implements BaseDTOValidator<BookingRequestDTO> {
+
+    private final RouteSegmentService segmentService;
+
+    @Autowired
+    public BookingRequestSegmentValidator(final RouteSegmentService segmentService){
+        this.segmentService = segmentService;
+    }
+
+
+    /**
+     * @param dto
+     * @throws Exception
+     */
+    @Override
+    public void validate(BookingRequestDTO dto) throws Exception {
+
+    }
+}

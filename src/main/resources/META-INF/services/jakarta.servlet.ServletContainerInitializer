@@ -1,1 +1,1 @@
-com.enactor.appserver.DispatchServletContainerInitializer
+com.enactor.appcore.appserver.DispatchServletContainerInitializer

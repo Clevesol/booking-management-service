@@ -1,9 +1,9 @@
 package com.enactor.controller;
 
-import com.enactor.appserver.core.annotation.Autowired;
-import com.enactor.appserver.core.annotation.Controller;
-import com.enactor.appserver.core.annotation.HTTPMethod;
-import com.enactor.appserver.core.annotation.RequestMapping;
+import com.enactor.appcore.appserver.core.annotation.Autowired;
+import com.enactor.appcore.appserver.core.annotation.Controller;
+import com.enactor.appcore.appserver.core.annotation.HTTPMethod;
+import com.enactor.appcore.appserver.core.annotation.RequestMapping;
 import com.enactor.domain.dto.BookingRequestDTO;
 import com.enactor.service.BookingService;
 import jakarta.servlet.http.HttpServletRequest;

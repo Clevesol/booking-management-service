@@ -3,7 +3,7 @@ package com.enactor.domain.stratergy;
 import com.enactor.domain.stratergy.impl.FixedSegmentPricingStrategy;
 import com.enactor.domain.stratergy.impl.PerKMPricingStrategy;
 import com.enactor.domain.stratergy.impl.PerSegmentPricingStrategy;
-import com.enactor.util.PricingStratergyEnum;
+import com.enactor.appcore.util.PricingStratergyEnum;
 
 public class PricingStrategyFactory {
 

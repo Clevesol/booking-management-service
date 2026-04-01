@@ -2,7 +2,7 @@ package com.enactor.domain.stratergy.impl;
 
 import com.enactor.domain.model.RouteSegment;
 import com.enactor.domain.stratergy.PricingStrategy;
-import com.enactor.util.BaseSingleton;
+import com.enactor.appcore.util.BaseSingleton;
 
 public class FixedSegmentPricingStrategy extends BaseSingleton implements PricingStrategy {
     /**

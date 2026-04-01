@@ -1,6 +1,6 @@
 package com.enactor.controller;
 
-import com.enactor.util.JSONMapper;
+import com.enactor.appcore.util.JSONMapper;
 import jakarta.servlet.http.HttpServletResponse;
 
 public class BaseController {
