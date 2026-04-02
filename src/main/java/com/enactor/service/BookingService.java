@@ -1,6 +1,7 @@
 package com.enactor.service;
 
 import com.enactor.appcore.appserver.core.annotation.Service;
+import com.enactor.domain.dto.BookingAvailabilityDTO;
 import com.enactor.domain.dto.BookingRequestDTO;
 import com.enactor.domain.model.Booking;
 import com.enactor.domain.model.Payment;
@@ -11,8 +12,8 @@ public class BookingService {
 
     private BookingRepo bookingRepo;
 
-    public String getAvailability() {
-        return "200";
+    public BookingAvailabilityDTO getAvailability() {
+        return new BookingAvailabilityDTO();
     }
 
     public Booking reserveBooking(final BookingRequestDTO requestDTO) throws Exception{

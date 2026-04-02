@@ -15,7 +15,6 @@ Please follow below instructions to deploy the application
 | Git | `Source Control` | **Optional**. https://git-scm.com/install/ |
 
 
-Takes two numbers and returns the sum.
 
 
 ## Deployment Steps

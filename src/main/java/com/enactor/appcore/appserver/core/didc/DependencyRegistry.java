@@ -2,15 +2,12 @@ package com.enactor.appcore.appserver.core.didc;
 
 import com.enactor.appcore.appserver.core.didc.filter.DependencyFilter;
 import com.enactor.appcore.util.BaseSingleton;
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 
 import java.lang.reflect.Constructor;
 import java.util.*;
 
 public class DependencyRegistry extends BaseSingleton {
 
-    Logger logger = LoggerFactory.getLogger(DependencyRegistry.class);
 
     private final Map<Class<?>, Object> componentRegistry = new HashMap<>();
 
@@ -37,9 +34,8 @@ public class DependencyRegistry extends BaseSingleton {
                             : bestConstructor.newInstance(parameters);
 
                     componentRegistry.put(clazz, obj);
-                    logger.info(" looping dependency class -> {}", clazz);
+
                     for(DependencyFilter filter : filters){
-                        logger.info("filtering class -> {}", clazz);
                         filter.performFilter(clazz,obj);
                     }
 

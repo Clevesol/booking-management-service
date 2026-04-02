@@ -1,5 +1,6 @@
 package com.enactor.appcore.util.validator;
 
+import com.enactor.appcore.appserver.core.didc.filter.DependencyFilter;
 import com.enactor.appcore.appserver.core.didc.filter.impl.ValidatorDependencyFilter;
 import com.enactor.appcore.util.BaseSingleton;
 
@@ -7,14 +8,14 @@ import java.util.List;
 
 public class ValidatorsContainer extends BaseSingleton {
 
-    private final ValidatorDependencyFilter validatorDependencyFilter;
+    private final DependencyFilter validatorDependencyFilter;
 
     public ValidatorsContainer(){
         this.validatorDependencyFilter = ValidatorDependencyFilter.getInstance();
     }
 
     public List<BaseDTOValidator> getValidatorsByDTO(Object dto){
-        return this.validatorDependencyFilter.getValidatorsByDTO(dto);
+        return ((ValidatorDependencyFilter) this.validatorDependencyFilter).getFilterCriteria(dto);
     }
 
     public void chainValidate(Object dto) throws Exception{
