@@ -18,6 +18,10 @@ public class Booking {
 
     private BookingStatusEnum status;
 
+    private Payment payment;
+
+
+
     public UUID getId() {
         return id;
     }

@@ -87,28 +87,39 @@ public class RequestInterceptor {
         writeResponse(resp, response);
     }
 
-    private ResponseEntity getResponseEntity(ControllerHandler handler, HttpServletRequest req, HttpServletResponse resp) throws InvocationTargetException, IllegalAccessException, UnsupportedOperationException {
+    private ResponseEntity<?> getResponseEntity(ControllerHandler handler, HttpServletRequest req, HttpServletResponse resp) {
 
-        if(handler == null) throw new UnsupportedOperationException("The handler dependency unsatisfied");
+        if (handler == null) {
+            throw new IllegalStateException("ControllerHandler dependency is unsatisfied");
+        }
 
-        ResponseEntity response;
         Method method = handler.getMethod();
-
         Class<?> returnType = method.getReturnType();
 
-        if (returnType == void.class) {
-            throw new UnsupportedOperationException("The method type void is not supported for the type controller at the moment");
+
+        if (void.class.equals(returnType)) {
+            throw new UnsupportedOperationException("Void return types are not supported for controllers.");
         }
 
+        try {
 
-        Object result = handler.invoke(req, resp);
-        if (returnType != ResponseEntity.class) {
-            response = new ResponseEntity(result).ok();
+            Object result = handler.invoke(req, resp);
 
-        } else {
-            response = (ResponseEntity) result;
+            if (result instanceof ResponseEntity) {
+                return (ResponseEntity<?>) result;
+            }
+
+            return new ResponseEntity(result).ok();
+
+        } catch (InvocationTargetException e) {
+
+            Throwable cause = e.getCause();
+            if (cause instanceof RuntimeException) {
+                throw (RuntimeException) cause;
+            }
+            throw new RuntimeException("Error executing controller method: " + method.getName(), cause);
+        } catch (IllegalAccessException e) {
+            throw new RuntimeException("Security violation: Cannot access method " + method.getName(), e);
         }
-
-        return response;
     }
 }

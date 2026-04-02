@@ -1,5 +1,6 @@
 package com.enactor.repo;
 
+import com.enactor.domain.dto.BookingAvailabilityResponse;
 import com.enactor.domain.model.Booking;
 
 public class BookingRepo {
@@ -10,4 +11,7 @@ public class BookingRepo {
     }
 
 
+    public BookingAvailabilityResponse findByAvailabilityRequestDTO() {
+        return null;
+    }
 }

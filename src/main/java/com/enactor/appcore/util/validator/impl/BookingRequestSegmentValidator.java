@@ -3,14 +3,14 @@ package com.enactor.appcore.util.validator.impl;
 import com.enactor.appcore.appserver.core.annotation.Autowired;
 import com.enactor.appcore.appserver.core.annotation.DTOValidator;
 import com.enactor.appcore.util.validator.BaseDTOValidator;
-import com.enactor.domain.dto.BookingRequestDTO;
+import com.enactor.domain.dto.BookingRequest;
 import com.enactor.service.RouteSegmentService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 
 @DTOValidator
-public class BookingRequestSegmentValidator implements BaseDTOValidator<BookingRequestDTO> {
+public class BookingRequestSegmentValidator implements BaseDTOValidator<BookingRequest> {
 
     private final RouteSegmentService segmentService;
 
@@ -27,7 +27,7 @@ public class BookingRequestSegmentValidator implements BaseDTOValidator<BookingR
      * @throws Exception
      */
     @Override
-    public void validate(BookingRequestDTO dto) throws Exception {
+    public void validate(BookingRequest dto) throws Exception {
         LOG.info("Validating {}" ,dto.getClass().getName());
     }
 }

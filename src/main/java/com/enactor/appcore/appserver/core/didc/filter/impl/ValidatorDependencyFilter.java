@@ -33,6 +33,10 @@ public class ValidatorDependencyFilter extends BaseSingleton implements Dependen
         }
     }
 
+    public List<BaseDTOValidator> getValidators(String validatorType){
+        return this.validators.get(validatorType);
+    }
+
     public List<BaseDTOValidator> getValidatorsByDTO(Object dto){
         return this.validators.get(dto.getClass().getName());
     }

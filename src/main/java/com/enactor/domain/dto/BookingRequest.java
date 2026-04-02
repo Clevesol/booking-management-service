@@ -4,7 +4,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.UUID;
 
-public class BookingRequestDTO{
+public class BookingRequest {
 
     private int seatsCount;
 
@@ -20,6 +20,13 @@ public class BookingRequestDTO{
 
     private Object paymentDetails;
 
+    public LocalDateTime getTripDate() {
+        return tripDate;
+    }
+
+    public void setTripDate(LocalDateTime tripDate) {
+        this.tripDate = tripDate;
+    }
 
     public int getSeatsCount() {
         return seatsCount;

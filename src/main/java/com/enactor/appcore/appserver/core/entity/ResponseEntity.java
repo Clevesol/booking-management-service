@@ -1,18 +1,18 @@
 package com.enactor.appcore.appserver.core.entity;
 
-public class ResponseEntity{
+public class ResponseEntity<T>{
 
     private int status;
 
     private String contentType;
 
-    private Object body;
+    private T body;
 
     public ResponseEntity(){
 
     }
 
-    public ResponseEntity(Object body){
+    public ResponseEntity(T body){
         this.body = body;
     }
 
@@ -48,10 +48,10 @@ public class ResponseEntity{
     }
 
     public Object getBody() {
-        return body;
+        return (T) body;
     }
 
     public void setBody(Object body) {
-        this.body = body;
+        this.body = (T) body;
     }
 }

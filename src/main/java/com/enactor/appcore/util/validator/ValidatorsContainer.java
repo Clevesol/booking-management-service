@@ -1,6 +1,5 @@
 package com.enactor.appcore.util.validator;
 
-import com.enactor.appcore.appserver.core.didc.filter.DependencyFilter;
 import com.enactor.appcore.appserver.core.didc.filter.impl.ValidatorDependencyFilter;
 import com.enactor.appcore.util.BaseSingleton;
 
@@ -8,7 +7,7 @@ import java.util.List;
 
 public class ValidatorsContainer extends BaseSingleton {
 
-    private final DependencyFilter validatorDependencyFilter;
+    private final ValidatorDependencyFilter validatorDependencyFilter;
 
     public ValidatorsContainer(){
         this.validatorDependencyFilter = ValidatorDependencyFilter.getInstance();
@@ -26,6 +25,10 @@ public class ValidatorsContainer extends BaseSingleton {
 
     public static ValidatorsContainer getInstance(){
         return BaseSingleton.getInstance(ValidatorsContainer.class);
+    }
+
+    public List<BaseDTOValidator> getValidator(Class<?> type){
+        return this.validatorDependencyFilter.getValidators(type.getName());
     }
 
 
